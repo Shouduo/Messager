@@ -37,7 +37,7 @@ public class PeopleListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 People people = peopleList.get(position);
-                // access to chatlist
+                //TODO: access to chatlist
             }
         });
         return view;

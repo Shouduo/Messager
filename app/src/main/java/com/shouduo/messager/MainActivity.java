@@ -18,6 +18,9 @@ import android.view.View;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Fragment fragment;
+    Fragment peopleListFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,10 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        peopleListFragment = new PeopleListFragment();
+        fragment = peopleListFragment;
+        fragmentTransac();
 
     }
 
@@ -81,26 +88,36 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Fragment fragment;
 
         int id = item.getItemId();
-        if (id == R.id.nav_photo) {
-            fragment = new PeopleListFragment();
-        } else if (id == R.id.nav_about) {
-            fragment = new PeopleListFragment();
-        } else if (id == R.id.nav_cafe) {
-            fragment = new PeopleListFragment();
-        } else {
-            fragment = new PeopleListFragment();
+        switch (id) {
+            case R.id.nav_people:
+                fragment = peopleListFragment;
+                break;
+            case R.id.nav_photo:
+
+                break;
+            case R.id.nav_about:
+
+                break;
+            case R.id.nav_cafe:
+
+                break;
+            default:
+                break;
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.content_framelayout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        fragmentTransac();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void fragmentTransac (){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content_framelayout, fragment);
+//        transaction.addToBackStack();
+        transaction.commit();
     }
 }
