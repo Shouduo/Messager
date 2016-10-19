@@ -43,9 +43,6 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        MenuItem peopleItem = (MenuItem) findViewById(R.id.nav_people);
-        onNavigationItemSelected(peopleItem);
-
     }
 
     @Override
