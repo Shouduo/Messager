@@ -3,6 +3,8 @@ package com.shouduo.messager;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,15 @@ public class PeopleListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 People people = peopleList.get(position);
-                //TODO: access to chatlist
+                switch (people.getName()) {
+                    case "Kevin":
+                        Fragment fragment = new ChatFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.replace(R.id.content_framelayout, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                }
             }
         });
         return view;
