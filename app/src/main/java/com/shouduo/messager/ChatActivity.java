@@ -1,11 +1,7 @@
 package com.shouduo.messager;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,11 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ChatFragment extends Fragment {
+public class ChatActivity extends BaseActivity {
 
     private ListView msgListView;
     private EditText inputText;
@@ -26,25 +18,16 @@ public class ChatFragment extends Fragment {
 
     private List<Msg> msgList = new ArrayList<>();
 
-
-    public ChatFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
-//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-//        fab.setVisibility(View.INVISIBLE);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat);
 
         initMsg();
-        adapter = new MsgAdapter(getContext(), R.layout.msg_item, msgList);
-        inputText = (EditText) view.findViewById(R.id.input_text);
-        send = (Button) view.findViewById(R.id.send);
-        msgListView = (ListView) view.findViewById(R.id.msg_list_view);
+        adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
+        inputText = (EditText) findViewById(R.id.input_text);
+        send = (Button) findViewById(R.id.send);
+        msgListView = (ListView) findViewById(R.id.msg_list_view);
         msgListView.setAdapter(adapter);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +48,6 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-        return view;
     }
 
     private void initMsg() {
@@ -81,5 +63,4 @@ public class ChatFragment extends Fragment {
                 "   ︶ ", Msg.TYPE_SENT, R.drawable.nickyoung);
         msgList.add(msg4);
     }
-
 }

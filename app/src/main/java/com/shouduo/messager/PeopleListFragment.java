@@ -1,10 +1,11 @@
 package com.shouduo.messager;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,16 @@ public class PeopleListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_people_list, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         mockPeopleData();
         PeopleAdapter peopleAdapter = new PeopleAdapter(getContext(), R.layout.people_item, peopleList);
         ListView listView = (ListView) view.findViewById(R.id.people_listview);
@@ -40,16 +51,12 @@ public class PeopleListFragment extends Fragment {
                 People people = peopleList.get(position);
                 switch (people.getName()) {
                     case "Kevin":
-                        Fragment fragment = new ChatFragment();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.content_framelayout, fragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
                         break;
                     default:
                         break;
                 }
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                startActivity(intent);
             }
         });
         return view;
