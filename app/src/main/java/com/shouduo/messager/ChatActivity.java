@@ -24,6 +24,18 @@ public class ChatActivity extends BaseActivity {
         setContentView(R.layout.activity_chat);
 
         initMsg();
+
+//
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+////        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+
         adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
         inputText = (EditText) findViewById(R.id.input_text);
         send = (Button) findViewById(R.id.send);
@@ -55,12 +67,9 @@ public class ChatActivity extends BaseActivity {
         msgList.add(msg1);
         Msg msg2 = new Msg("Excited. Who is that", Msg.TYPE_SENT, R.drawable.nickyoung);
         msgList.add(msg2);
-        Msg msg3 = new Msg("This is Wallace. Nice talking to you.", Msg.TYPE_RECEIVED, R.drawable.kevin);
+        Msg msg3 = new Msg("在下骚文，有何贵干", Msg.TYPE_RECEIVED, R.drawable.kevin);
         msgList.add(msg3);
-        Msg msg4 = new Msg("          ;;;\n" +
-                "❐..❐- ∂  \n" +
-                "  '～' }  /\n" +
-                "   ︶ ", Msg.TYPE_SENT, R.drawable.nickyoung);
+        Msg msg4 = new Msg("???", Msg.TYPE_SENT, R.drawable.nickyoung);
         msgList.add(msg4);
     }
 }
