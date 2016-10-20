@@ -35,7 +35,10 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+//        fab.setVisibility(View.INVISIBLE);
 
         initMsg();
         adapter = new MsgAdapter(getContext(), R.layout.msg_item, msgList);

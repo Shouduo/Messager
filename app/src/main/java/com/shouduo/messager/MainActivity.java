@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.VISIBLE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    public void fragmentTransac (){
+    public void fragmentTransac() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.content_framelayout, fragment);

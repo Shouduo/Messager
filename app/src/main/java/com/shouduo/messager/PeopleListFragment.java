@@ -22,7 +22,6 @@ public class PeopleListFragment extends Fragment {
 
     private List<People> peopleList = new ArrayList<>();
 
-
     public PeopleListFragment() {
         // Required empty public constructor
     }
@@ -47,16 +46,25 @@ public class PeopleListFragment extends Fragment {
                         transaction.replace(R.id.content_framelayout, fragment);
                         transaction.addToBackStack(null);
                         transaction.commit();
+                        break;
+                    default:
+                        break;
                 }
             }
         });
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        peopleList.clear();
+    }
+
     private void mockPeopleData() {
         People kevin = new People("Kevin", 4836, R.drawable.kevin);
-        peopleList.add(kevin);
         People elder = new People("Elder", 1989, R.drawable.elder);
+        peopleList.add(kevin);
         peopleList.add(elder);
     }
 
