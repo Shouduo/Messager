@@ -28,7 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChatActivity"
-                  android:label="Kevin"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>

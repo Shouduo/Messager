@@ -1,5 +1,8 @@
 package com.shouduo.messager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 刘亨俊 on 16.10.18.
  */
@@ -8,6 +11,7 @@ public class People {
     private String name;
     private int id;
     private int image;
+    private List<Msg> msgList = new ArrayList<>();
 
     public People(String name, int id, int image) {
         this.name = name;

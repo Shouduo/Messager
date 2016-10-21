@@ -56,6 +56,7 @@ public class PeopleListFragment extends Fragment {
                         break;
                 }
                 Intent intent = new Intent(getContext(), ChatActivity.class);
+                intent.putExtra("name", people.getName());
                 startActivity(intent);
             }
         });
