@@ -2,6 +2,7 @@ package com.shouduo.messager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,6 @@ public class ChatActivity extends BaseActivity {
     private EditText inputText;
     private Button send;
     private MsgAdapter adapter;
-
     private List<Msg> msgList = new ArrayList<>();
 
     @Override
@@ -25,7 +25,7 @@ public class ChatActivity extends BaseActivity {
         setContentView(R.layout.activity_chat);
 
         Intent intent = getIntent();
-        People people = (People) intent.getSerializableExtra("people");
+        final People people = (People) intent.getSerializableExtra("people");
 
         setTitle(people.getName());
         msgList = people.getMsgList();
@@ -45,14 +45,27 @@ public class ChatActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                     msgListView.setSelection(msgList.size());
                     inputText.setText("");
-                    if ("岂因祸福避趋之".equals(content)) {
-                        Msg msgReply = new Msg("只做了一点微小的工作，hin惭愧", Msg.TYPE_RECEIVED, R.drawable.elder);
-                        msgList.add(msgReply);
-                        adapter.notifyDataSetChanged();
-                        msgListView.setSelection(msgList.size());
-                    }
                 }
+
+                autoReply(people.getName(), content);
+
             }
         });
+    }
+
+    private void autoReply(String name, String content) {
+        if ("Elder".equals(name) && "1".equals(content)) {
+
+            Msg msgReply = new Msg("只做了一点微小的工作，hin惭愧", Msg.TYPE_RECEIVED, R.drawable.elder);
+            msgList.add(msgReply);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                    msgListView.setSelection(msgList.size());
+                }
+            },1000 );
+
+        }
     }
 }
