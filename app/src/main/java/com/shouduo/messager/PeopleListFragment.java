@@ -49,14 +49,8 @@ public class PeopleListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 People people = peopleList.get(position);
-                switch (people.getName()) {
-                    case "Kevin":
-                        break;
-                    default:
-                        break;
-                }
                 Intent intent = new Intent(getContext(), ChatActivity.class);
-                intent.putExtra("name", people.getName());
+                intent.putExtra("people", people);
                 startActivity(intent);
             }
         });
@@ -72,8 +66,35 @@ public class PeopleListFragment extends Fragment {
     private void mockPeopleData() {
         People kevin = new People("Kevin", 4836, R.drawable.kevin);
         People elder = new People("Elder", 1989, R.drawable.elder);
+
+        List<Msg> kevinMsgList = new ArrayList<>();
+        Msg msg1 = new Msg("Hello?", Msg.TYPE_RECEIVED, R.drawable.kevin);
+        kevinMsgList.add(msg1);
+        Msg msg2 = new Msg("Excited. Who is that", Msg.TYPE_SENT, R.drawable.nickyoung);
+        kevinMsgList.add(msg2);
+        Msg msg3 = new Msg("在下骚文，有何贵干", Msg.TYPE_RECEIVED, R.drawable.kevin);
+        kevinMsgList.add(msg3);
+        Msg msg4 = new Msg("他强任他强，劳资尼克杨", Msg.TYPE_SENT, R.drawable.nickyoung);
+        kevinMsgList.add(msg4);
+
+        List<Msg> elderMsgList = new ArrayList<>();
+        Msg msg5 = new Msg("西方记者?", Msg.TYPE_RECEIVED, R.drawable.elder);
+        elderMsgList.add(msg5);
+        Msg msg6 = new Msg("蛤？", Msg.TYPE_SENT, R.drawable.nickyoung);
+        elderMsgList.add(msg6);
+        Msg msg7 = new Msg("当时我就说了两句诗", Msg.TYPE_RECEIVED, R.drawable.elder);
+        elderMsgList.add(msg7);
+        Msg msg8 = new Msg("???", Msg.TYPE_SENT, R.drawable.nickyoung);
+        elderMsgList.add(msg8);
+        Msg msg9 = new Msg("苟利国家生死以……", Msg.TYPE_RECEIVED, R.drawable.elder);
+        elderMsgList.add(msg9);
+
+        kevin.setMsgList(kevinMsgList);
+        elder.setMsgList(elderMsgList);
+
         peopleList.add(kevin);
         peopleList.add(elder);
+
     }
 
 }
