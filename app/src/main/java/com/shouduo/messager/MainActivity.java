@@ -80,8 +80,8 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_people:
-                
                 fragment = peopleListFragment;
+                fragmentTransac();
                 break;
             case R.id.nav_photo:
 
@@ -92,10 +92,12 @@ public class MainActivity extends BaseActivity
             case R.id.nav_cafe:
 
                 break;
+            case R.id.fab:
+
+                break;
             default:
                 break;
         }
-        fragmentTransac();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

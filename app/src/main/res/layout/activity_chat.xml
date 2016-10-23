@@ -2,9 +2,9 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
               android:background="#1000"
-              tools:context="com.shouduo.messager.ChatFragment">
+              android:orientation="vertical"
+              tools:context="com.shouduo.messager.ChatActivity">
 
 
     <ListView
@@ -23,9 +23,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="18sp"
             android:hint="Type something here"
-            android:maxLines="2" />
+            android:maxLines="2"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/send"
@@ -33,9 +33,9 @@
             android:layout_height="30dp"
             android:background="@color/colorAccent"
             android:text="Send"
-            android:textSize="18sp"
+            android:textAllCaps="false"
             android:textColor="#fff"
-            android:textAllCaps="false"/>
+            android:textSize="18sp"/>
     </LinearLayout>
 
 </LinearLayout>
