@@ -176,10 +176,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
         Intent intent = new Intent();
         intent.putExtra("photo", photo);
         setResult(RESULT_OK, intent);
         finish();
+        super.onBackPressed();
     }
 }

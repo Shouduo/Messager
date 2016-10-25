@@ -2,6 +2,7 @@ package com.shouduo.messager;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity
     Fragment peopleListFragment;
 
     private CircleImageView headImage;
+    private Bitmap photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        photo = BitmapFactory.decodeResource(getResources(), R.drawable.nickyoung);
         peopleListFragment = new PeopleListFragment();
         fragment = peopleListFragment;
         fragmentTransac();
@@ -135,7 +138,12 @@ public class MainActivity extends BaseActivity
 
         switch (requestCode) {
             case CODE_SET_IMAGE:
-                headImage.setImageBitmap((Bitmap) data.getParcelableExtra("photo"));
+                photo = data.getParcelableExtra("photo");
+                headImage.setImageBitmap(photo);
         }
+    }
+
+    public Bitmap getPhoto() {
+        return photo;
     }
 }

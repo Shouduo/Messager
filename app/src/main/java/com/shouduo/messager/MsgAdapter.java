@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import static android.R.attr.resource;
-
 /**
  * Created by 刘亨俊 on 16.10.20.
  */
@@ -23,7 +21,7 @@ public class MsgAdapter extends ArrayAdapter<Msg> {
     private int resourceId;
 
     public MsgAdapter(Context context, int textViewResourceId, List<Msg> objects) {
-        super(context, resource, textViewResourceId, objects);
+        super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
 
