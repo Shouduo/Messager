@@ -9,15 +9,11 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
@@ -29,12 +25,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,12 +59,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private ImageView mLoginImage;
-    private Uri mImageUri;
-
-    public static final int TAKE_PHOTO = 1;
-    public static final int CROP_PHOTO = 2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,26 +67,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
-        mLoginImage = (ImageView) findViewById(R.id.login_image);
-        mLoginImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outputImage = new File(Environment.getExternalStorageDirectory(), "output_image");
-                try {
-                    if (outputImage.exists()) {
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mImageUri = Uri.fromFile(outputImage);
-                Intent mIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-                mIntent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                startActivityForResult(mIntent, TAKE_PHOTO);
-            }
-        });
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -378,33 +344,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case TAKE_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    Intent intent = new Intent("com.android.camera.action.CROP");
-                    intent.setDataAndType(mImageUri, "image/*");
-                    intent.putExtra("scale", true);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                    startActivityForResult(intent, CROP_PHOTO);
-                }
-                break;
-            case CROP_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mImageUri));
-                        mLoginImage.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-            default:
-                break;
         }
     }
 }

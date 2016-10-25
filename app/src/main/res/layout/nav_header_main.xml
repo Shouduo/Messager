@@ -23,25 +23,20 @@
 
     <com.shouduo.messager.CircleImageView
         android:id="@+id/head_Image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:paddingTop="16dp"
-        app:civ_border_width="24dp"
-        app:civ_border_color="@color/colorAccent"/>
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorPrimaryDark"
+        android:src="@drawable/erha"/>
 
     <TextView
-        android:id="@+id/head_Name"
+        android:id="@+id/head_Id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Android Studio"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-    <TextView
-        android:id="@+id/head_Id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com"/>
 
 </LinearLayout>

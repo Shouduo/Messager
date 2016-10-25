@@ -10,11 +10,6 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="com.shouduo.messager.LoginActivity">
 
-    <ImageView
-        android:id="@+id/login_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/erha"/>
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"

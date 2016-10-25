@@ -1,5 +1,7 @@
 package com.shouduo.messager;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,12 +13,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int CODE_SET_IMAGE = 0xa0;
+
     Fragment fragment;
     Fragment peopleListFragment;
+
+    private CircleImageView headImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,15 @@ public class MainActivity extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        headImage = (CircleImageView) findViewById(R.id.head_Image);
+        headImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivityForResult(intent, CODE_SET_IMAGE);
+            }
+        });
+
         return true;
     }
 
@@ -92,9 +109,6 @@ public class MainActivity extends BaseActivity
             case R.id.nav_cafe:
 
                 break;
-            case R.id.fab:
-
-                break;
             default:
                 break;
         }
@@ -110,5 +124,18 @@ public class MainActivity extends BaseActivity
         transaction.replace(R.id.content_framelayout, fragment);
 //        transaction.addToBackStack();
         transaction.commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+        }
+
+        switch (requestCode) {
+            case CODE_SET_IMAGE:
+                headImage.setImageBitmap((Bitmap) data.getParcelableExtra("photo"));
+        }
     }
 }
