@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -66,6 +67,14 @@ public class MainActivity extends BaseActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         headImage = (CircleImageView) findViewById(R.id.head_Image);
+        String path = Environment.getExternalStorageDirectory() + "/Ask/okkk.jpg";
+        Bitmap photo = BitmapFactory.decodeFile(path);
+        if (photo != null) {
+            headImage.setImageBitmap(photo);
+        } else {
+            headImage.setImageResource(R.drawable.nickyoung);
+        }
+
         headImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,5 +154,11 @@ public class MainActivity extends BaseActivity
 
     public Bitmap getPhoto() {
         return photo;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

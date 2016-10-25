@@ -3,12 +3,12 @@ package com.shouduo.messager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     private static final String IMAGE_FILE_NAME = "temp_head_image.jpg";
 
@@ -38,6 +38,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         final String[] items = {"Take Photo", "Choose From Gallery"};
         profileImage = (CircleImageView) findViewById(R.id.profile_Image);
+
+        String path = Environment.getExternalStorageDirectory() + "/Ask/okkk.jpg";
+        Bitmap photo = BitmapFactory.decodeFile(path);
+        if (photo == null) {
+           profileImage.setImageResource(R.drawable.nickyoung);
+        } else {
+            profileImage.setImageBitmap(photo);
+        }
+
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,8 +169,6 @@ public class ProfileActivity extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
@@ -176,10 +183,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        Intent intent = new Intent();
-        intent.putExtra("photo", photo);
-        setResult(RESULT_OK, intent);
+        if (photo != null) {
+            Intent intent = new Intent();
+            intent.putExtra("photo", photo);
+            setResult(RESULT_OK, intent);
+        } else {
+            Intent intent = new Intent();
+            setResult(RESULT_CANCELED, intent);
+        }
         finish();
         super.onBackPressed();
     }

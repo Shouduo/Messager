@@ -1,6 +1,9 @@
 package com.shouduo.messager;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +58,14 @@ public class MsgAdapter extends ArrayAdapter<Msg> {
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
             viewHolder.leftLayout.setVisibility(View.GONE);
             viewHolder.rightMsg.setText(msg.getContent());
-            viewHolder.rightPhoto.setImageResource(msg.getPhotoId());
+
+            String path = Environment.getExternalStorageDirectory() + "/Ask/okkk.jpg";
+            Bitmap photo = BitmapFactory.decodeFile(path);
+            if (photo == null) {
+                viewHolder.rightPhoto.setImageResource(msg.getPhotoId());
+            } else {
+                viewHolder.rightPhoto.setImageBitmap(photo);
+            }
         }
 
         return view;

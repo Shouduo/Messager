@@ -2,7 +2,6 @@ package com.shouduo.messager;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,7 +22,7 @@ import java.util.List;
 public class PeopleListFragment extends Fragment {
 
     private List<People> peopleList = new ArrayList<>();
-    private Bitmap photo;
+//    private Bitmap photo;
 
     public PeopleListFragment() {
         // Required empty public constructor
@@ -45,7 +44,7 @@ public class PeopleListFragment extends Fragment {
 
         mockPeopleData();
 
-        photo = ((MainActivity)getActivity()).getPhoto();
+//        photo = ((MainActivity)getActivity()).getPhoto();
 
 
         PeopleAdapter peopleAdapter = new PeopleAdapter(getContext(), R.layout.people_item, peopleList);
@@ -57,7 +56,7 @@ public class PeopleListFragment extends Fragment {
                 People people = peopleList.get(position);
                 Intent intent = new Intent(getContext(), ChatActivity.class);
                 intent.putExtra("people", people);
-                intent.putExtra("photo", photo);
+//                intent.putExtra("photo", photo);  //something wrong here
                 startActivity(intent);
             }
         });
@@ -77,21 +76,21 @@ public class PeopleListFragment extends Fragment {
         List<Msg> kevinMsgList = new ArrayList<>();
         Msg msg1 = new Msg("Hello?", Msg.TYPE_RECEIVED, R.drawable.kevin);
         kevinMsgList.add(msg1);
-        Msg msg2 = new Msg("Excited. Who is that", Msg.TYPE_SENT, photo);
+        Msg msg2 = new Msg("Excited. Who is that", Msg.TYPE_SENT, R.drawable.nickyoung);
         kevinMsgList.add(msg2);
         Msg msg3 = new Msg("在下骚文，有何贵干", Msg.TYPE_RECEIVED, R.drawable.kevin);
         kevinMsgList.add(msg3);
-        Msg msg4 = new Msg("他强任他强，劳资尼克杨", Msg.TYPE_SENT, photo);
+        Msg msg4 = new Msg("他强任他强，劳资尼克杨", Msg.TYPE_SENT, R.drawable.nickyoung);
         kevinMsgList.add(msg4);
 
         List<Msg> elderMsgList = new ArrayList<>();
         Msg msg5 = new Msg("西方记者?", Msg.TYPE_RECEIVED, R.drawable.elder);
         elderMsgList.add(msg5);
-        Msg msg6 = new Msg("蛤？", Msg.TYPE_SENT, photo);
+        Msg msg6 = new Msg("蛤？", Msg.TYPE_SENT, R.drawable.nickyoung);
         elderMsgList.add(msg6);
         Msg msg7 = new Msg("当时我就说了两句诗", Msg.TYPE_RECEIVED, R.drawable.elder);
         elderMsgList.add(msg7);
-        Msg msg8 = new Msg("???", Msg.TYPE_SENT, photo);
+        Msg msg8 = new Msg("???", Msg.TYPE_SENT, R.drawable.nickyoung);
         elderMsgList.add(msg8);
         Msg msg9 = new Msg("苟利国家生死以……", Msg.TYPE_RECEIVED, R.drawable.elder);
         elderMsgList.add(msg9);

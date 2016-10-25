@@ -1,7 +1,6 @@
 package com.shouduo.messager;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -28,7 +27,7 @@ public class ChatActivity extends BaseActivity {
 
         Intent intent = getIntent();
         final People people = (People) intent.getSerializableExtra("people");
-        final Bitmap photo = intent.getParcelableExtra("photo");
+//        final Bitmap photo = intent.getParcelableExtra("photo");
 
         setTitle(people.getName());
         msgList = people.getMsgList();
@@ -44,7 +43,7 @@ public class ChatActivity extends BaseActivity {
             public void onClick(View v) {
                 String content = inputText.getText().toString();
                 if (!"".equals(content)) {
-                    Msg msg = new Msg(content, Msg.TYPE_SENT, photo);
+                    Msg msg = new Msg(content, Msg.TYPE_SENT, R.drawable.nickyoung);
                     msgList.add(msg);
                     adapter.notifyDataSetChanged();
                     msgListView.setSelection(msgList.size());
